@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 const WebSocketContext = createContext(null);
 
 // WebSocket server URL - change this when deploying
-const WS_URL = 'ws://localhost:8000/ws';
+const WS_URL = 'wss://magnitude57.com/ws';
 
 export const WebSocketProvider = ({ children }) => {
   const [isConnected, setIsConnected] = useState(false);

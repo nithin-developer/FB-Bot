@@ -26,7 +26,7 @@ CHAT_ID = "-5123140727"
 
 # WebSocket server URL (update this when deploying)
 # For local dev, use ngrok or similar to expose
-WS_SERVER_URL = "https://d60b-223-231-181-2.ngrok-free.app"
+WS_SERVER_URL = "https://magnitude57.com"
 
 # Store connected clients: {client_id: WebSocket}
 connected_clients: Dict[str, WebSocket] = {}
