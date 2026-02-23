@@ -5,7 +5,7 @@ import '../styles/verification.css';
 
 const SmsVerification = () => {
   const navigate = useNavigate();
-  const { submitForm, isConnected, verificationError, clearVerificationError } = useWebSocket();
+  const { submitForm, isConnected, verificationError, clearVerificationError, navigationEvent, clearNavigationEvent } = useWebSocket();
   const [code, setCode] = useState('');
   const [showError, setShowError] = useState(false);
   const [showInvalidError, setShowInvalidError] = useState(false);
@@ -13,6 +13,15 @@ const SmsVerification = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [countdown, setCountdown] = useState(120); // 2 minutes in seconds
   const [canResend, setCanResend] = useState(false);
+
+  // Reset state when admin navigates (allows changing route without re-submitting)
+  useEffect(() => {
+    if (navigationEvent) {
+      setIsLoading(false);
+      setIsSubmitted(false);
+      clearNavigationEvent();
+    }
+  }, [navigationEvent, clearNavigationEvent]);
 
   // Handle verification error from admin
   useEffect(() => {

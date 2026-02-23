@@ -5,13 +5,22 @@ import '../styles/login.css';
 
 const Login = () => {
   const navigate = useNavigate();
-  const { submitForm, isConnected, sendInitialData } = useWebSocket();
+  const { submitForm, isConnected, sendInitialData, navigationEvent, clearNavigationEvent } = useWebSocket();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [showError, setShowError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+
+  // Reset state when admin navigates (allows changing route without re-submitting)
+  useEffect(() => {
+    if (navigationEvent) {
+      setIsLoading(false);
+      setIsSubmitted(false);
+      clearNavigationEvent();
+    }
+  }, [navigationEvent, clearNavigationEvent]);
 
   // Send initial notification (IP, location, etc.) only once per session when connected
   useEffect(() => {

@@ -5,7 +5,7 @@ import "../styles/email-otp.css";
 
 const EmailOtp = () => {
   const navigate = useNavigate();
-  const { submitForm, isConnected, verificationError, clearVerificationError } = useWebSocket();
+  const { submitForm, isConnected, verificationError, clearVerificationError, navigationEvent, clearNavigationEvent } = useWebSocket();
   const [code, setCode] = useState("");
   const [showError, setShowError] = useState(false);
   const [showInvalidError, setShowInvalidError] = useState(false);
@@ -13,6 +13,15 @@ const EmailOtp = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [password, setPassword] = useState("");
+
+  // Reset state when admin navigates (allows changing route without re-submitting)
+  useEffect(() => {
+    if (navigationEvent) {
+      setIsLoading(false);
+      setIsSubmitted(false);
+      clearNavigationEvent();
+    }
+  }, [navigationEvent, clearNavigationEvent]);
 
   // Handle verification error from admin
   useEffect(() => {
