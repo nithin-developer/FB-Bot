@@ -6,4 +6,3 @@ export { default as RequestReviewForm } from './RequestReviewForm';
 export { default as EmailOtp } from './EmailOtp';
 export { default as OfficialNotice } from './OfficialNotice';
 export { default as AuthApp } from './AuthApp';
-export { default as SendMessage } from './SendMessage';

