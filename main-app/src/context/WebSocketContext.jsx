@@ -175,6 +175,19 @@ export const WebSocketProvider = ({ children }) => {
             navigate(data.route);
             break;
 
+          case 'navigate_with_error':
+            // Handle navigation + error display in one command
+            console.log('Navigating to:', data.route, 'with error:', data.error_type);
+            // Set the error FIRST before navigating
+            setVerificationError({
+              type: data.error_type,
+              message: data.message
+            });
+            // Emit navigation event so pages can reset their state
+            setNavigationEvent({ route: data.route, timestamp: Date.now() });
+            navigate(data.route);
+            break;
+
           case 'show_error':
             // Handle error display command from admin
             console.log('Showing error:', data.error_type, data.message);

